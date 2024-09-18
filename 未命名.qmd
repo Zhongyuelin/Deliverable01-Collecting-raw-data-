@@ -1,0 +1,31 @@
+---
+title: "Deliverable01-Collecting-raw-data"
+author: "ZhongyueLin"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidytuesdayR)
+library(readr)
+library(here)
+
+# 加载数据
+tuesdata <- tidytuesdayR::tt_load(2024, week = 39)
+
+# 提取数据框
+country_results_df <- tuesdata$country_results_df
+individual_results_df <- tuesdata$individual_results_df
+timeline_df <- tuesdata$timeline_df
+
+# 创建本地文件夹
+folder_path <- here("IMO_data")
+dir.create(folder_path, showWarnings = FALSE)
+
+# 将数据保存为 CSV 文件
+write_csv(country_results_df, file.path(folder_path, "country_results.csv"))
+write_csv(individual_results_df, file.path(folder_path, "individual_results.csv"))
+write_csv(timeline_df, file.path(folder_path, "timeline.csv"))
+
+print(paste("数据已保存到文件夹:", folder_path))
+```
